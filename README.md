@@ -17,6 +17,7 @@ Code for our paper: ["Share First, Ask Later (or Never?) - Studying Violations o
 3. Start the mitmproxy on your server machine and change the network setting on your Android devices to your Proxy server  
 
 # How to Use
+ In the following, we show how to collect the app network traffic and detect persona data that is being sent to the Internet without user consent
  
 ## Network Traffic Analysis: 
 
@@ -59,3 +60,6 @@ To detect the above data, you can use this script (note that there are some data
 | -s  | The Android device serial number  |
 | -f  | The csv file that contains package name and the corresponding path to the apk file. For example: each line in this csv file is a `"package_name","file_path"`  |
 | -d  | The directory that contains the output of the network traffic analysis|
+
+## Detecting Potentially Unique Tracking Identifiers Detector
+To detect potentially unique tracking identifiers, you could use the above scripts and then follow our workflow in the paper.

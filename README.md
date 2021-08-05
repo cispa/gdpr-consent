@@ -1,7 +1,7 @@
 # GDPR-Consent
-Code for our paper: "Share First, Ask Later (or Never?) - Studying Violations of GDPR's Explicit Consent in Android Apps"
+Code for our paper: ["Share First, Ask Later (or Never?) - Studying Violations of GDPR's Explicit Consent in Android Apps" (USENIX Security 2021)](https://publications.cispa.saarland/3400/1/nguyen2021gdpr.pdf)
 
-Overview: Our main goal is to have a mostly automated and scalable solution to detect personal data that is being sent to the Internet without users’ explicit consent, as is mandated by the GDPR. We set up an array of Android devices, on which we run each app (without any interaction) and capture the network traffic. Based on personal data which is directly tied to the phone, we automatically detect this data in both plain and encoded form through string matching. Further, we derive a methodology that allows us to pinpoint data that may be other unique identifiers and manually validate whether this can be used to track the user/device.
+*Overview*: Our main goal is to have a mostly automated and scalable solution to detect personal data that is being sent to the Internet without users’ explicit consent, as is mandated by the GDPR. We set up an array of Android devices, on which we run each app (without any interaction) and capture the network traffic. Based on personal data which is directly tied to the phone, we automatically detect this data in both plain and encoded form through string matching. Further, we derive a methodology that allows us to pinpoint data that may be other unique identifiers and manually validate whether this can be used to track the user/device.
 
 ![alt text](overview_workflow.png)
 
@@ -13,13 +13,16 @@ Overview: Our main goal is to have a mostly automated and scalable solution to d
 
 # How to Install
 1. Clone this repository and install all the dependencies with pip (`pip install -r requirements.txt`)
-2. Started the Frida server on your Android devices
-3. Configuring a Proxy server on your Android devices
+2. Start the Frida server on your Android devices
+3. Start the mitmproxy on your server machine and change the network setting on your Android devices to your Proxy server  
 
 # How to Use
-1. Network Traffic Analysis: . In the first step of our analysis pipeline, we aim to identify apps that send some data when started. To achieve that, we install the app in question and grant all requested permissions listed in the manifest, i.e., both install time and runtime permissions. Subsequently, we launch the app and record its network traffic.
+ 
+## Network Traffic Analysis: 
 
-`python network-traffic-analysis.py -s FA6AL0309000 -p 8080 -f apk_file_input.csv -o output/`
+In the first step of our analysis pipeline, we aim to identify apps that send some data when started. To achieve that, we install the app in question and grant all requested permissions listed in the manifest, i.e., both install time and runtime permissions. Subsequently, we launch the app and record its network traffic.
+
+`python network-traffic-analysis.py -s FA6AL0309062 -p 8080 -f apk_file_input.csv -o output/`
 
 | Parameter  | Description |
 | ------------- | ------------- |
@@ -28,7 +31,9 @@ Overview: Our main goal is to have a mostly automated and scalable solution to d
 | -f  | The csv file that contains package name and the corresponding path to the apk file. For example: each line in this csv file is a `"package_name","file_path"`  |
 | -o  | The output directory |
 
-2.  Traffic Log Analyzer: The second step is to identify personal data that is tied to the phone, such as the location, the AAID, or the MAC address. Since such information is accessible by apps, we extract the relevant values from the phone through the Android debug bridge to ensure we know these values for each phone.
+## Traffic Log Analyzer (String-Matching Device-Bound Data): 
+
+The second step is to identify personal data that is tied to the phone, such as the location, the AAID, or the MAC address. Since such information is accessible by apps, we extract the relevant values from the phone through the Android debug bridge to ensure we know these values for each phone.
 
 | Data Type  | Description |
 | ------------- | ------------- |
@@ -44,3 +49,13 @@ Overview: Our main goal is to have a mostly automated and scalable solution to d
 |SERIAL | Phone hardware ID (serial number)|
 |SSID | Router SSIDs of nearby hotspots|
 |GSF ID | Google Services Framework ID|
+
+To detect the above data, you can use this script:
+
+`python detecting-pii-string-matching.py -s FA6AL0309062 -f apk_file_input.csv -d output/`
+
+| Parameter  | Description |
+| ------------- | ------------- |
+| -s  | The Android device serial number  |
+| -f  | The csv file that contains package name and the corresponding path to the apk file. For example: each line in this csv file is a `"package_name","file_path"`  |
+| -d  | The directory that contains the output of the network traffic analysis|

@@ -50,7 +50,7 @@ The second step is to identify personal data that is tied to the phone, such as 
 |SSID | Router SSIDs of nearby hotspots|
 |GSF ID | Google Services Framework ID|
 
-To detect the above data, you can use this script:
+To detect the above data, you can use this script (note that there are some data that could not be easily extracted by adb command, so you can use the Device ID app to get them, and then update this data accordingly in the script, i.e., the DEVICE_PII_DICT and GPS_DICT variables):
 
 `python detecting-pii-string-matching.py -s FA6AL0309062 -f apk_file_input.csv -d output/`
 

@@ -18,6 +18,7 @@ Note that we are not threatening legal action or plan to involve regulators, or 
 Please contact us if you have further questions or wish not to receive further communication. We will diligently follow the request.
 
 Best Bregards, **$researchers**
+
 Disclaimer: This study is part of a research project of the **$affiliation**. The collected information will be used for scientific purposes only. Your responses are pseudonymous. We do NOT collect any personal information, publicize or perform any actions against your apps, and your company.
 
 [1] General Data Protection Regulation. 2016. Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data, and repealing Directive 95/46.

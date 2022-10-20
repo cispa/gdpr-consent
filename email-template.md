@@ -17,7 +17,7 @@ Note that we are not threatening legal action or plan to involve regulators, or 
 
 Please contact us if you have further questions or wish not to receive further communication. We will diligently follow the request.
 
-Best Bregards, **$researchers**
+Best regards, **$researchers**
 
 Disclaimer: This study is part of a research project of the **$affiliation**. The collected information will be used for scientific purposes only. Your responses are pseudonymous. We do NOT collect any personal information, publicize or perform any actions against your apps, and your company.
 
